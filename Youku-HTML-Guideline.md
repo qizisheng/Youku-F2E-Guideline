@@ -2,13 +2,16 @@
 
 ##1.文件规范
 
-* DTD(doctype)统一用HTML5 文档声明 
+* DTD(doctype)统一用HTML5 文档声明, 语言属性设定为zh（有助于语音合成工具确定其所应采取的发音，有助于翻译工具确定翻译遵循的规则）
 	
-			<!doctype html>
+			<!DOCTYPE html>
+			<html lang="zh">
+				<!--...-->
+			</html>
 
 * 文件字符集格式统一为utf-8编码
 
-			<meta charset="utf-8" />
+			<meta charset="UTF-8" />
 			
 * 必须添加注释
 	* 页面级别 
@@ -27,13 +30,47 @@
 			<!-- 模块名字 -->
 			
 * html扩展名为`.html`
+* 引入CSS和JavaScript文件规则（HTML5移动开发中可不指定type属性）
+
+		<!-- External CSS -->
+		<link rel="stylesheet" href="cake.css">
+
+		<!-- In-document CSS -->
+		<style type="text/css">
+ 			 /* ... */
+		</style>
+
+		<!-- JavaScript -->
+		<script type="text/javascript" src="cake.js"></script>		
+	
+	
+* IE兼容模式，设置为edge mode，从而通知IE采用其所支持的最新模式
+
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		
 
 	
 ##2.书写规范
 
-* 表签名、属性名、必须用小写字母且不能简写 `禁止用拼音命名`（id除外,id可采用驼峰写法 i.e. toolBarItem）
+* HTML语义化（但不要以牺牲实用性为代价，任何时候都要尽量使用最少的标签保持最小的复杂度）,尽量减少标签数量
 
-* 代码排版用`tab` or `4个空格` 模块间隔要用一空行间隔
+* 表签名、属性名、必须用小写字母且不能简写 `禁止用拼音命名`（id除外,id可采用驼峰写法 i.e. toolBarItem）、
+
+* 属性书写顺序
+	* class
+	* id, name
+	* data-*
+	* src, for, type, href
+	* title, alt
+	* aria-*, role
+	
+			<a class="..." id="..." data-modal="toggle" href="#">Example link</a>
+
+			<input class="form-control" type="text">
+
+			<img src="..." alt="...">
+
+* 代码排版用`tab` or `2个空格` 模块间隔要用一空行间隔
 
 * 避免将样式写入标签
 
@@ -48,7 +85,7 @@
 
 * 元素必须关闭标签 包括自闭合标签 i.e. `<hr />` as `<hr>`, `<br />` as `<br>` and `<img />` as `<img>`,`<meta />` as `<meta>`.
 
-* 给所有属性赋值
+* 给所有属性赋值, 布尔(boolean)型属性也需要赋值
 
 		<input disabled="disabled" checked="checked" />
 		
@@ -70,3 +107,5 @@
 		</div><!-- navigation -->
 
 		<div class="spacer" role="separator"></div>
+		
+* JavaScript生成的标签。通过 JavaScript 生成的标签让内容变得不易查找、编辑，并且降低性能。能避免时尽量避免。
